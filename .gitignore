@@ -1,0 +1,11 @@
+# Roblox files
+*.rbxl
+*.rbxlx
+*.rbxm
+
+# Rojo server cache
+.rosync/
+
+# Studio temp files
+*.log
+*.tmp
