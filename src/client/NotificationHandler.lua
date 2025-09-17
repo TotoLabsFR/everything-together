@@ -23,6 +23,7 @@ function NotificationHandler:display()
 	instance.Parent = Main
 	instance.Visible = true
 	TweenService:Create(instance, Animation.normal, { GroupTransparency = 0 }):Play()
+	TweenService:Create(instance:FindFirstChild("FlashFrame"), Animation.normal, { BackgroundTransparency = 1 }):Play()
 end
 
 return NotificationHandler

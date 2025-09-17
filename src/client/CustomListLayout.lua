@@ -5,10 +5,21 @@ local Animation = require(script.Parent.Animation)
 local CustomListLayout = {}
 
 -- Helper function to tween a GuiObject's position
-local function tweenPosition(guiObject, targetPosition, isNew)
+-- Helper function to tween a GuiObject's position
+local function tweenPosition(guiObject: GuiObject, targetPosition, isNew, direction)
 	if isNew then
-		-- Start a bit higher to animate in
-		guiObject.Position = targetPosition - UDim2.new(0, 0, 0, guiObject.AbsoluteSize.Y)
+		-- Start a bit on the side to animate in
+		if direction == "Right" then
+			guiObject.Position = targetPosition + UDim2.new(0, guiObject.AbsoluteSize.X, 0, 0)
+		elseif direction == "Left" then
+			guiObject.Position = targetPosition - UDim2.new(0, guiObject.AbsoluteSize.X, 0, 0)
+		elseif direction == "Down" then
+			guiObject.Position = targetPosition + UDim2.new(0, 0, 0, guiObject.AbsoluteSize.Y)
+		elseif direction == "Up" then
+			guiObject.Position = targetPosition - UDim2.new(0, 0, 0, guiObject.AbsoluteSize.Y)
+		else
+			guiObject.Position = targetPosition - UDim2.new(0, guiObject.AbsoluteSize.X, 0, 0)
+		end
 	end
 	local tweenInfo = Animation.normal
 	local tween = TweenService:Create(guiObject, tweenInfo, {Position = targetPosition})
@@ -20,6 +31,8 @@ local function updateLayout(container)
 	local padding = container:GetAttribute("CustomListPadding") or 0
 	local horizontal = container:GetAttribute("CustomListHorizontal") or false
 	local direction = container:GetAttribute("CustomListDirection") or "Down" -- "Down", "Up", "Left", "Right"
+	local arriveDirection = container:GetAttribute("CustomListArriveDirection") or "Down" -- "Down", "Up", "Left", "Right"
+
 	local pos = 0
 	local children = {}
 	for i, child in container:GetChildren() do
@@ -58,7 +71,7 @@ local function updateLayout(container)
 		end
 
 		local isNew = child:GetAttribute("IsNewItem")
-		tweenPosition(child, targetPosition, isNew)
+		tweenPosition(child, targetPosition, isNew, arriveDirection)
 		if isNew then
 			child:SetAttribute("IsNewItem", nil)
 		end
