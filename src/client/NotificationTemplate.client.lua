@@ -1,20 +1,19 @@
+-- template for notifications, set enabled to false to disable them from popping up at start of play test
 local enabled = true
 if enabled then
     local NotificationHandler = require(script.Parent.NotificationHandler)
     local CustomListLayout = require(script.Parent.CustomListLayout)
+    local FillRemainder = require(script.Parent.FillRemainder)
+    local NotificationList = require(script.Parent.NotificationList)
     CustomListLayout.setup(script.Parent.Parent:WaitForChild("App"):WaitForChild("Notifications"))
 
     local Notification = NotificationHandler.new(15)
-    local Frame = Instance.new("Frame")
-    local TextLabel = Instance.new("TextLabel")
+    
+    local Content = NotificationList.NowPlaying:Clone()
 
-    TextLabel.Parent = Frame
-    TextLabel.Size = UDim2.new(1, 0, 1, 0)
-    TextLabel.TextXAlignment = Enum.TextXAlignment.Center
-    TextLabel.TextYAlignment = Enum.TextYAlignment.Center
-    TextLabel.Text = "test"
+    FillRemainder.watch(Content, Content.TextLabel, Content.UIListLayout, Content.UIPadding)
 
-    Notification:setContent(Frame)
+    Notification:setContent(Content)
     task.wait(3)
     Notification:display()
     task.wait(1)

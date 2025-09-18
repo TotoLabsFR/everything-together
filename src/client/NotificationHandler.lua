@@ -1,6 +1,7 @@
+-- notification instance handler
 local TweenService = game:GetService("TweenService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local NotificationTemplate = ReplicatedStorage:WaitForChild("Templates"):WaitForChild("Notification")
+local NotificationTemplate = ReplicatedStorage:WaitForChild("Notifications"):WaitForChild("Notification")
 local Main = script.Parent.Parent.App.Notifications
 local Animation = require(script.Parent.Animation)
 local NotificationHandler = {}
@@ -20,8 +21,6 @@ function NotificationHandler.new(Timeout: number)
 end
 
 function NotificationHandler:setContent(frame: Frame)
-	-- TODO: Add the "ContentContainer" frame to NotificationTemplate
-
 	frame.Name = "Content"
 	frame.Parent = self.Instance.ContentContainer
 	frame.Visible = true
