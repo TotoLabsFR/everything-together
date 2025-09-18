@@ -5,6 +5,16 @@ if enabled then
     CustomListLayout.setup(script.Parent.Parent:WaitForChild("App"):WaitForChild("Notifications"))
 
     local Notification = NotificationHandler.new(15)
+    local Frame = Instance.new("Frame")
+    local TextLabel = Instance.new("TextLabel")
+
+    TextLabel.Parent = Frame
+    TextLabel.Size = UDim2.new(1, 0, 1, 0)
+    TextLabel.TextXAlignment = Enum.TextXAlignment.Center
+    TextLabel.TextYAlignment = Enum.TextYAlignment.Center
+    TextLabel.Text = "test"
+
+    Notification:setContent(Frame)
     task.wait(3)
     Notification:display()
     task.wait(1)
