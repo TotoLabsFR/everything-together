@@ -9,3 +9,4 @@
 # Studio temp files
 *.log
 *.tmp
+.vscode
