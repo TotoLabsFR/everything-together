@@ -1,6 +1,7 @@
+-- notification instance handler
 local TweenService = game:GetService("TweenService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local NotificationTemplate = ReplicatedStorage:WaitForChild("Templates"):WaitForChild("Notification")
+local NotificationTemplate = ReplicatedStorage:WaitForChild("Notifications"):WaitForChild("Notification")
 local Main = script.Parent.Parent.App.Notifications
 local Animation = require(script.Parent.Animation)
 local NotificationHandler = {}
@@ -8,12 +9,24 @@ NotificationHandler.__index = NotificationHandler
 
 function NotificationHandler.new(Timeout: number)
 	local self = setmetatable({
-		Timeout = Timeout
+		Timeout = Timeout,
+		Instance = nil,
+		Content = nil
 	}, NotificationHandler)
 	
 	local notification = NotificationTemplate:Clone()
 	self.Instance = notification
 	
+	return self
+end
+
+function NotificationHandler:setContent(frame: Frame)
+	frame.Name = "Content"
+	frame.Parent = self.Instance.ContentContainer
+	frame.Visible = true
+	
+	self.Content = frame
+
 	return self
 end
 
@@ -23,6 +36,9 @@ function NotificationHandler:display()
 	instance.Parent = Main
 	instance.Visible = true
 	TweenService:Create(instance, Animation.normal, { GroupTransparency = 0 }):Play()
+	TweenService:Create(instance:FindFirstChild("FlashFrame"), Animation.normal, { BackgroundTransparency = 1 }):Play()
+
+	return self
 end
 
 return NotificationHandler
