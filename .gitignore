@@ -10,3 +10,5 @@
 *.log
 *.tmp
 .vscode
+
+sourcemap.json
