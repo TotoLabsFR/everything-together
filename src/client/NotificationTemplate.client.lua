@@ -16,7 +16,4 @@ if enabled then
     Notification:setContent(Content)
     task.wait(3)
     Notification:display()
-    task.wait(1)
-    local Notification2 = NotificationHandler.new(15)
-    Notification2:display()
 end
