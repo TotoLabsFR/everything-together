@@ -74,14 +74,6 @@ local function updateLayout(container)
 			child:SetAttribute("IsNewItem", nil)
 		end
 	end
-
-	if container:IsA("ScrollingFrame") then
-		if horizontal or direction == "Left" or direction == "Right" then
-			container.CanvasSize = UDim2.new(0, pos, 0, container.AbsoluteSize.Y)
-		else
-			container.CanvasSize = UDim2.new(0, container.AbsoluteSize.X, 0, pos)
-		end
-	end
 end
 
 function CustomListLayout.setup(container: Instance)
