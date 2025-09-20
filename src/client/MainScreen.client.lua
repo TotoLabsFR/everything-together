@@ -19,12 +19,28 @@ end)
 
 function itemButton_onMouseEnter(button)
 	TweenService:Create(button, Animation.bouncy, { Size = UDim2.new(0, 350, 0, 150) }):Play()
-	TweenService:Create(button.Frame, Animation.bouncy, { Size = UDim2.new(1, 0, 1, 0) }):Play()
+	TweenService:Create(
+		button.Frame,
+		Animation.bouncy,
+		{
+			Size = UDim2.new(1, 0, 1, 0),
+			AnchorPoint = Vector2.new((button.LayoutOrder == 1) and 1 or 0, .5),
+			Position = UDim2.new((button.LayoutOrder == 1) and 1 or 0, 0, .5, 0)
+		}
+	):Play()
 end
 
 function itemButton_onMouseLeave(button)
 	TweenService:Create(button, Animation.bouncy, { Size = UDim2.new(0, 250, 0, 150) }):Play()
-	TweenService:Create(button.Frame, Animation.bouncy, { Size = UDim2.new(.84, 0, 1, 0) }):Play()
+	TweenService:Create(
+		button.Frame,
+		Animation.bouncy,
+		{
+			Size = UDim2.new(.84, 0, 1, 0),
+			AnchorPoint = Vector2.new(.5, .5),
+			Position = UDim2.new(.5, 0, .5, 0)
+		}
+	):Play()
 end
 
 for i, v in MainItems:GetChildren() do
