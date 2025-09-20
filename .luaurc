@@ -1,0 +1,6 @@
+{
+	"languageMode": "nonstrict",
+	"lint": { "*": true, "LocalUnused": false, "ImportUnused": false },
+	"lintErrors": true,
+	"globals": ["expect"]
+}
