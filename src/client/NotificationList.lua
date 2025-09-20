@@ -1,4 +1,4 @@
--- just a list of notification instances I can pick up from different scripts
+-- Just a list of notification instances I can pick up from different scripts
 type NotificationList = { [string]: GuiObject }
 
 local NotificationList: NotificationList = {

@@ -1,12 +1,12 @@
--- wanted to add tweening to list layouts so had to make my own
+-- Wanted to add tweening to list layouts so had to make my own
 local TweenService = game:GetService("TweenService")
 local Animation = require(script.Parent.Animation)
 local CustomListLayout = {}
 
--- helper function to tween a GuiObject's position
+-- Helper function to tween a GuiObject's position
 local function tweenPosition(guiObject: GuiObject, targetPosition, isNew, direction)
 	if isNew then
-		-- start a bit on the side to animate in
+		-- Start a bit on the side to animate in
 		if direction == "Right" then
 			guiObject.Position = targetPosition + UDim2.new(0, guiObject.AbsoluteSize.X, 0, 0)
 		elseif direction == "Left" then
@@ -24,7 +24,7 @@ local function tweenPosition(guiObject: GuiObject, targetPosition, isNew, direct
 	tween:Play()
 end
 
--- helper function to update layout
+-- Helper function to update layout
 local function updateLayout(container)
 	local padding = container:GetAttribute("CustomListPadding") or 0
 	local horizontal = container:GetAttribute("CustomListHorizontal") or false
@@ -39,16 +39,16 @@ local function updateLayout(container)
 		end
 	end
 
-	-- for "Up" direction, newest notification should be at the top
+	-- For "Up" direction, newest notification should be at the top
 	if direction == "Up" then
-		-- sort children so newest is first (assuming last added is newest)
+		-- Sort children so newest is first (assuming last added is newest)
 		local sorted = {}
 		for i = #children, 1, -1 do
 			table.insert(sorted, children[i])
 		end
 		children = sorted
 	elseif direction == "Left" then
-		-- for "Left", reverse order
+		-- For "Left", reverse order
 		local reversed = {}
 		for i = #children, 1, -1 do
 			table.insert(reversed, children[i])
@@ -59,11 +59,11 @@ local function updateLayout(container)
 	for i, child in children do
 		local targetPosition
 		if horizontal or direction == "Left" or direction == "Right" then
-			-- horizontal layout
+			-- Horizontal layout
 			targetPosition = UDim2.new(0, pos, child.Position.Y.Scale, child.Position.Y.Offset)
 			pos = pos + child.Size.X.Offset + padding
 		else
-			-- vertical layout
+			-- Vertical layout
 			targetPosition = UDim2.new(child.Position.X.Scale, child.Position.X.Offset, 0, pos)
 			pos = pos + child.Size.Y.Offset + padding
 		end
@@ -77,9 +77,9 @@ local function updateLayout(container)
 end
 
 function CustomListLayout.setup(container: Instance)
-	-- initial layout
+	-- Initial layout
 	updateLayout(container)
-	-- listen for child changes
+	-- Listen for child changes
 	container.ChildAdded:Connect(function(child)
 		if child:IsA("GuiObject") then
 			child:SetAttribute("IsNewItem", true)
@@ -89,7 +89,7 @@ function CustomListLayout.setup(container: Instance)
 	container.ChildRemoved:Connect(function()
 		updateLayout(container)
 	end)
-	-- optionally listen for attribute changes (padding, direction)
+	-- Optionally listen for attribute changes (padding, direction)
 	container:GetAttributeChangedSignal("CustomListPadding"):Connect(function()
 		updateLayout(container)
 	end)

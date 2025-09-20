@@ -1,4 +1,4 @@
--- a modulescript to make instances fill its entire container (with help from UIListLayout)
+-- A modulescript to make instances fill its entire container (with help from UIListLayout)
 local FillRemainder = {}
 
 function FillRemainder.watch(container: Frame, fillFrame: GuiObject, layout: UIListLayout, padding: UIPadding?)
@@ -17,13 +17,13 @@ function FillRemainder.watch(container: Frame, fillFrame: GuiObject, layout: UIL
             end
         end
 
-        -- calculate padding from UIListLayout w/ padding count
+        -- Calculate padding from UIListLayout w/ padding count
         local totalLayoutPadding = 0
         if paddingCount > 0 then
             totalLayoutPadding = layout.Padding.Offset * paddingCount
         end
 
-        -- account for UIPadding on both axes
+        -- Account for UIPadding on both axes
         local extraPadding = 0
         if padding then
             if layout.FillDirection == Enum.FillDirection.Vertical then
@@ -33,7 +33,7 @@ function FillRemainder.watch(container: Frame, fillFrame: GuiObject, layout: UIL
             end
         end
 
-        -- leftover space depends on orientation
+        -- Leftover space depends on orientation
         local leftover = 0
         if layout.FillDirection == Enum.FillDirection.Vertical then
             leftover = container.AbsoluteSize.Y - totalUsed - totalLayoutPadding - extraPadding
@@ -44,7 +44,7 @@ function FillRemainder.watch(container: Frame, fillFrame: GuiObject, layout: UIL
         end
     end
 
-    -- connect signals
+    -- Connect signals
     layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(updateFill)
     container:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateFill)
     fillFrame:GetPropertyChangedSignal("Visible"):Connect(updateFill)
@@ -56,7 +56,7 @@ function FillRemainder.watch(container: Frame, fillFrame: GuiObject, layout: UIL
         padding:GetPropertyChangedSignal("PaddingRight"):Connect(updateFill)
     end
 
-    -- initial update
+    -- Initial update
     task.defer(updateFill)
 end
 

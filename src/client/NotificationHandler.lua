@@ -1,4 +1,4 @@
--- notification instance handler
+-- Notification instance handler
 local TweenService = game:GetService("TweenService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local NotificationTemplate = ReplicatedStorage:WaitForChild("Notifications"):WaitForChild("Notification")

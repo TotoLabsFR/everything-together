@@ -1,10 +1,10 @@
--- services
+-- Services
 local TweenService = game:GetService("TweenService")
 
--- modules
+-- Modules
 local Animation = require(script.Parent.Animation)
 
--- variables
+-- Variables
 local Main = script.Parent.Parent:WaitForChild("App"):WaitForChild("MainScreen")
 local MainItems = Main.MainItems
 local MainButton = MainItems.MainButton

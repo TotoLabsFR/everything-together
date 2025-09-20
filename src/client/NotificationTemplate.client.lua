@@ -1,4 +1,4 @@
--- template for notifications, set enabled to false to disable them from popping up at start of play test
+-- Template for notifications, set enabled to false to disable them from popping up at start of play test
 local enabled = true
 if enabled then
     local NotificationHandler = require(script.Parent.NotificationHandler)
