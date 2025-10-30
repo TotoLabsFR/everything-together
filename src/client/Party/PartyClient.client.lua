@@ -22,9 +22,10 @@ local PartyButtons = {}
 local PartyMembers = {}
 
 PartySelect:WaitForChild("Create").MouseButton1Click:Connect(function()
-    local party = EventFolder:WaitForChild("CreateParty"):InvokeServer("New Party")
+    local party: Types.Party = EventFolder:WaitForChild("CreateParty"):InvokeServer("New Party")
     CurrentParty.Visible = true
     IsInParty = true
+	CurrentParty.PartyId.Value = party.id
 end)
 
 PartySelect:WaitForChild("Bottom"):WaitForChild("Back").MouseButton1Click:Connect(function()
@@ -82,6 +83,8 @@ while true do
 					local joinedParty = EventFolder:WaitForChild("JoinParty"):InvokeServer(partyId)
 					IsInParty = true
 					PartyMembers = {} -- Reset member store when joining
+					CurrentParty.PartyId.Value = partyId
+					CurrentParty.Visible = true
 				end)
 			end
 
